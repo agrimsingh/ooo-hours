@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Office Hours - Iterative Retreat
 
-## Getting Started
+An AI-powered office hours booking app that allows users to have real-time voice conversations with AI clones of Brian and Hsu Ken using ElevenLabs Conversational AI.
 
-First, run the development server:
+## Features
+
+- **Voice Conversations**: Real-time voice chat powered by ElevenLabs Conversational AI
+- **Live Transcripts**: Follow along with text transcripts during the conversation
+- **Session Timer**: Track conversation duration
+- **Minimal UI**: Clean, dark interface focused on the conversation
+- **No Authentication**: Instant access - just click and start talking
+
+## Setup
+
+### 1. Install Dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure ElevenLabs
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Create agents on [ElevenLabs](https://elevenlabs.io/app/agents):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   - Create one agent for Brian
+   - Create one agent for Hsu Ken
+   - Configure their personalities and knowledge bases on the ElevenLabs platform
 
-## Learn More
+2. Get your API key from [ElevenLabs API Settings](https://elevenlabs.io/app/settings/api-keys)
 
-To learn more about Next.js, take a look at the following resources:
+3. Copy the agent IDs from your created agents
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Set Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a `.env.local` file in the root directory:
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_ELEVENLABS_API_KEY=your_api_key_here
+NEXT_PUBLIC_BRIAN_AGENT_ID=your_brian_agent_id
+NEXT_PUBLIC_HSU_KEN_AGENT_ID=your_hsu_ken_agent_id
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Run Development Server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+## Tech Stack
+
+- **Next.js 14+** - React framework with App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling with custom dark theme
+- **@elevenlabs/react** - ElevenLabs voice AI SDK
+- **pnpm** - Package manager
+
+## Usage
+
+1. Navigate to the home page
+2. Choose either Brian or Hsu Ken
+3. Click "Start Conversation" and allow microphone access
+4. Speak naturally - the AI will respond in real-time
+5. Watch the live transcript appear as you chat
+6. End the conversation when you're done
+
+## Deployment
+
+Deploy to Vercel:
+
+```bash
+vercel
+```
+
+Make sure to add your environment variables in the Vercel project settings.
+
+## Project Structure
+
+```
+/app
+  /conversation/[agent]
+    page.tsx          # Dynamic conversation route
+  page.tsx            # Landing page
+  layout.tsx          # Root layout
+  globals.css         # Global styles
+/components
+  ConversationInterface.tsx  # Main conversation component
+/lib
+  elevenlabs.ts       # Agent configuration
+```
