@@ -71,6 +71,7 @@ export default function ConversationInterface({
       await navigator.mediaDevices.getUserMedia({ audio: true });
       await conversation.startSession({
         agentId: agentId,
+        connectionType: "webrtc",
       });
       setElapsedTime(0);
     } catch (error) {
